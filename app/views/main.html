@@ -1,0 +1,48 @@
+<div class="col-md-12">
+    <div class="page-header">
+        <h1>Hey {{player.name}}</h1>
+    </div>
+    <h6>click it. last 3 records are shown.
+        <br>analysis is coming soon...Stay tuned!
+    </h6>
+    <div class="col-md-12">
+        <div class="panel-group" id="exercises" ng-repeat="exercise in exercises track by $id(exercise)">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#exercises" data-target="#{{exercise.id}}">
+                            {{exercise.name}}
+                        </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse" id="{{exercise.id}}">
+                    <div class="panel-body">
+
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th ng-repeat="repetition in exercise.repetitions | limitTo:-3">
+                                    {{repetition.date | date : 'EEE-dd.MM.' :short }}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td ng-repeat="repetition in exercise.repetitions | limitTo:-3">
+                                    {{repetition.count|number:0}}
+                                    <br/>
+                                    <a ng-click="deleteRepetition(exercise, repetition)"><span
+                                            class="glyphicon glyphicon-remove"></span></a>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--repetitions[exercise.repetitions.length-1].count*1) + (exercise.sliderVal*1)-->
+                        I did:&nbsp;{{exercise.sliderVal || 30}}&nbsp;
+                        <input id="inputRange" ng-change="updateNewRepetitionValue(exercise)"
+                               type="range" min="{{minValue(exercise)}}" max="{{maxValue(exercise)}}" ng-model="exercise.sliderVal">
+                        <a class="button" ng-click="insert(exercise, exercise.newRep)"> Yeah!!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

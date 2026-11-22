@@ -1,0 +1,17 @@
+<div class="col-md-12">
+    <div class="page-header">
+        <h1>Hey CrossFit-Guys!</h1>
+    </div>
+    <p class="lead">
+        Choose Your Player!!!
+        <br>
+        And have fun enslaving yourself!
+    </p>
+    <div class="col-md-12">
+        <div ng-repeat="player in allPlayers">
+            <a class="btn btn-lg btn-info" ng-click="choosePlayer(player)" href="main">
+                {{player.name}}
+            </a>
+        </div>
+    </div>
+</div>
